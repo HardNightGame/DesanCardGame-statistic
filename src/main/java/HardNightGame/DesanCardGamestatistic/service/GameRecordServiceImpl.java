@@ -6,8 +6,10 @@ import HardNightGame.DesanCardGamestatistic.model.GameRecord;
 import HardNightGame.DesanCardGamestatistic.repository.GameRecordRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Service;
 
 @Slf4j
+@Service
 public class GameRecordServiceImpl implements GameRecordService {
     private final GameRecordRepository gameRecordRepository;
     private final Converter<GameRecord, GameRecordId> modelToDtoIdConverter;
