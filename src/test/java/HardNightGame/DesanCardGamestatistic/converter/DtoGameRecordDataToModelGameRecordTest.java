@@ -1,6 +1,6 @@
 package HardNightGame.DesanCardGamestatistic.converter;
 
-import HardNightGame.DesanCardGamestatistic.dto.NewGameRecord;
+import HardNightGame.DesanCardGamestatistic.dto.GameRecordData;
 import HardNightGame.DesanCardGamestatistic.model.GameRecord;
 import org.junit.jupiter.api.Test;
 
@@ -8,24 +8,24 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DtoNewGameRecordToModelGameRecordTest {
+class DtoGameRecordDataToModelGameRecordTest {
 
-    DtoNewGameRecordToModelGameRecord dtoNewGameRecordToModelGameRecord = new DtoNewGameRecordToModelGameRecord();
+    DtoGameRecordDataToModelGameRecord dtoGameRecordDataToModelGameRecord = new DtoGameRecordDataToModelGameRecord();
 
     Random random = new Random();
 
     @Test
     void convert_Null() {
-        assertNull(dtoNewGameRecordToModelGameRecord.convert(null));
+        assertNull(dtoGameRecordDataToModelGameRecord.convert(null));
     }
 
     @Test
     void convert_Empty() {
         // Array
-        NewGameRecord newGameRecord = new NewGameRecord();
+        GameRecordData gameRecordData = new GameRecordData();
 
         // Act
-        GameRecord assertGameRecord = dtoNewGameRecordToModelGameRecord.convert(newGameRecord);
+        GameRecord assertGameRecord = dtoGameRecordDataToModelGameRecord.convert(gameRecordData);
 
         // Assert
         assertNull(assertGameRecord.getId());
@@ -39,11 +39,11 @@ class DtoNewGameRecordToModelGameRecordTest {
         String expName = "aoeui";
         Integer expGameTime = random.nextInt();
 
-        NewGameRecord newGameRecord = NewGameRecord.builder().Name(expName).GameTime(expGameTime).build();
+        GameRecordData gameRecordData = GameRecordData.builder().Name(expName).GameTime(expGameTime).build();
 
         // Act
 
-        GameRecord assertGameRecord = dtoNewGameRecordToModelGameRecord.convert(newGameRecord);
+        GameRecord assertGameRecord = dtoGameRecordDataToModelGameRecord.convert(gameRecordData);
 
         // Assert
         assertEquals(expName, assertGameRecord.getName());

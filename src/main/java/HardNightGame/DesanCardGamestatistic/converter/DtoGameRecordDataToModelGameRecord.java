@@ -1,12 +1,12 @@
 package HardNightGame.DesanCardGamestatistic.converter;
 
-import HardNightGame.DesanCardGamestatistic.dto.NewGameRecord;
+import HardNightGame.DesanCardGamestatistic.dto.GameRecordData;
 import HardNightGame.DesanCardGamestatistic.model.GameRecord;
 import org.springframework.core.convert.converter.Converter;
 
-public class DtoNewGameRecordToModelGameRecord implements Converter<NewGameRecord, GameRecord> {
+public class DtoGameRecordDataToModelGameRecord implements Converter<GameRecordData, GameRecord> {
     @Override
-    public GameRecord convert(NewGameRecord source) {
+    public GameRecord convert(GameRecordData source) {
         if (source == null)
             return null;
 
