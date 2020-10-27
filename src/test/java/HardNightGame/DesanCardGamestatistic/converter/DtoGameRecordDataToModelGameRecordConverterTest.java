@@ -8,9 +8,9 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DtoGameRecordDataToModelGameRecordTest {
+class DtoGameRecordDataToModelGameRecordConverterTest {
 
-    DtoGameRecordDataToModelGameRecord dtoGameRecordDataToModelGameRecord = new DtoGameRecordDataToModelGameRecord();
+    DtoGameRecordDataToModelGameRecordConverter dtoGameRecordDataToModelGameRecord = new DtoGameRecordDataToModelGameRecordConverter();
 
     Random random = new Random();
 
