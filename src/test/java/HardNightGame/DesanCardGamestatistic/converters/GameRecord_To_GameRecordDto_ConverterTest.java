@@ -1,8 +1,9 @@
-package HardNightGame.DesanCardGamestatistic.converter;
+package HardNightGame.DesanCardGamestatistic.converters;
 
-import HardNightGame.DesanCardGamestatistic.dto.GameRecord;
-import HardNightGame.DesanCardGamestatistic.dto.GameRecordData;
-import HardNightGame.DesanCardGamestatistic.dto.GameRecordId;
+import HardNightGame.DesanCardGamestatistic.dtos.GameRecordDto;
+import HardNightGame.DesanCardGamestatistic.dtos.GameRecordDataDto;
+import HardNightGame.DesanCardGamestatistic.dtos.GameRecordIdDto;
+import HardNightGame.DesanCardGamestatistic.models.GameRecord;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,18 +16,18 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class ModelGameRecordToDtoGameRecordConverterTest {
+class GameRecord_To_GameRecordDto_ConverterTest {
 
     @Mock
-    Converter<HardNightGame.DesanCardGamestatistic.model.GameRecord, GameRecordId> modelToDtoIdConverter;
+    Converter<GameRecord, GameRecordIdDto> modelToDtoIdConverter;
     @Mock
-    Converter<HardNightGame.DesanCardGamestatistic.model.GameRecord, GameRecordData> modelToDtoDataConverter;
+    Converter<GameRecord, GameRecordDataDto> modelToDtoDataConverter;
 
-    ModelGameRecordToDtoGameRecordConverter converter;
+    GameRecord_To_GameRecordDto_Converter converter;
 
     @BeforeEach
     void setUp() {
-        converter = new ModelGameRecordToDtoGameRecordConverter(modelToDtoIdConverter, modelToDtoDataConverter);
+        converter = new GameRecord_To_GameRecordDto_Converter(modelToDtoIdConverter, modelToDtoDataConverter);
     }
 
     @Test
@@ -37,10 +38,10 @@ class ModelGameRecordToDtoGameRecordConverterTest {
     @Test
     void convert_Empty() {
         // Array
-        var gameRecord = new HardNightGame.DesanCardGamestatistic.model.GameRecord();
+        var gameRecord = new GameRecord();
 
         // Act
-        GameRecord assertGameRecord = converter.convert(gameRecord);
+        GameRecordDto assertGameRecord = converter.convert(gameRecord);
 
         // Assert
         assertNull(assertGameRecord.getId());
@@ -50,16 +51,16 @@ class ModelGameRecordToDtoGameRecordConverterTest {
     @Test
     void convert() {
         // Array
-        var gameRecord = new HardNightGame.DesanCardGamestatistic.model.GameRecord();
+        var gameRecord = new GameRecord();
 
-        GameRecordId expGameRecordId = new GameRecordId();
-        GameRecordData expGameRecordData = new GameRecordData();
+        GameRecordIdDto expGameRecordId = new GameRecordIdDto();
+        GameRecordDataDto expGameRecordData = new GameRecordDataDto();
 
         when(modelToDtoIdConverter.convert(gameRecord)).thenReturn(expGameRecordId);
         when(modelToDtoDataConverter.convert(gameRecord)).thenReturn(expGameRecordData);
 
         // Act
-        GameRecord assertedGameRecord = converter.convert(gameRecord);
+        GameRecordDto assertedGameRecord = converter.convert(gameRecord);
 
         // Assert
         assertEquals(expGameRecordId, assertedGameRecord.getId());

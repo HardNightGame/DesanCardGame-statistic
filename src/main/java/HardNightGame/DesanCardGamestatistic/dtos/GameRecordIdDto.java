@@ -1,4 +1,4 @@
-package HardNightGame.DesanCardGamestatistic.dto;
+package HardNightGame.DesanCardGamestatistic.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class GameRecordId {
+public class GameRecordIdDto {
     private Integer Id;
 }

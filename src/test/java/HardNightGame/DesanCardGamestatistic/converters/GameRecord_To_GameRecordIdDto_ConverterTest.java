@@ -1,16 +1,16 @@
-package HardNightGame.DesanCardGamestatistic.converter;
+package HardNightGame.DesanCardGamestatistic.converters;
 
-import HardNightGame.DesanCardGamestatistic.dto.GameRecordId;
-import HardNightGame.DesanCardGamestatistic.model.GameRecord;
+import HardNightGame.DesanCardGamestatistic.dtos.GameRecordIdDto;
+import HardNightGame.DesanCardGamestatistic.models.GameRecord;
 import org.junit.jupiter.api.Test;
 
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ModelGameRecordToDtoGameRecordIdConverterTest {
+class GameRecord_To_GameRecordIdDto_ConverterTest {
 
-    ModelGameRecordToDtoGameRecordIdConverter converter = new ModelGameRecordToDtoGameRecordIdConverter();
+    GameRecord_To_GameRecordIdDto_Converter converter = new GameRecord_To_GameRecordIdDto_Converter();
 
     Random random = new Random();
 
@@ -25,7 +25,7 @@ class ModelGameRecordToDtoGameRecordIdConverterTest {
         GameRecord gameRecord = new GameRecord();
 
         // Act
-        GameRecordId assertGameRecordId = converter.convert(gameRecord);
+        GameRecordIdDto assertGameRecordId = converter.convert(gameRecord);
 
         // Assert
         assertNull(assertGameRecordId.getId());
@@ -41,7 +41,7 @@ class ModelGameRecordToDtoGameRecordIdConverterTest {
 
         // Act
 
-        GameRecordId assertGameRecordId = converter.convert(gameRecord);
+        GameRecordIdDto assertGameRecordId = converter.convert(gameRecord);
 
         // Assert
         assertEquals(expId, assertGameRecordId.getId());

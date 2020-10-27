@@ -1,4 +1,4 @@
-package HardNightGame.DesanCardGamestatistic.dto;
+package HardNightGame.DesanCardGamestatistic.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class GameRecordData {
+public class GameRecordDataDto {
     private String Name;
     private Integer GameTime;
 }

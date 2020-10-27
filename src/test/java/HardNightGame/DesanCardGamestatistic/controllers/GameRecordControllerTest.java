@@ -1,9 +1,8 @@
-package HardNightGame.DesanCardGamestatistic.controller;
+package HardNightGame.DesanCardGamestatistic.controllers;
 
-import HardNightGame.DesanCardGamestatistic.dto.GameRecordData;
-import HardNightGame.DesanCardGamestatistic.dto.GameRecordId;
-import HardNightGame.DesanCardGamestatistic.service.GameRecordService;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import HardNightGame.DesanCardGamestatistic.dtos.GameRecordDataDto;
+import HardNightGame.DesanCardGamestatistic.dtos.GameRecordIdDto;
+import HardNightGame.DesanCardGamestatistic.services.GameRecordService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -42,9 +41,9 @@ class GameRecordControllerTest {
     @Test
     void addGameRecord() throws Exception {
         // Array
-        GameRecordData newGameRecordData = GameRecordData.builder().build();
+        GameRecordDataDto newGameRecordData = GameRecordDataDto.builder().build();
 
-        GameRecordId expGameRecordId = GameRecordId.builder().build();
+        GameRecordIdDto expGameRecordId = GameRecordIdDto.builder().build();
         when(gameRecordService.AddGameRecord(newGameRecordData)).thenReturn(expGameRecordId);
 
         String jsonRequest = objectMapper.writeValueAsString(newGameRecordData);
@@ -57,7 +56,7 @@ class GameRecordControllerTest {
                 .andReturn();
         String assertedJSON = result.getResponse().getContentAsString();
 
-        GameRecordId assertedGameRecordId = objectMapper.readValue(assertedJSON, GameRecordId.class);
+        GameRecordIdDto assertedGameRecordId = objectMapper.readValue(assertedJSON, GameRecordIdDto.class);
 
         // Assert
 

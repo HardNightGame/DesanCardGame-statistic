@@ -1,6 +1,6 @@
-package HardNightGame.DesanCardGamestatistic.repository;
+package HardNightGame.DesanCardGamestatistic.repositories;
 
-import HardNightGame.DesanCardGamestatistic.model.GameRecord;
+import HardNightGame.DesanCardGamestatistic.models.GameRecord;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

@@ -1,9 +1,9 @@
-package HardNightGame.DesanCardGamestatistic.controller;
+package HardNightGame.DesanCardGamestatistic.controllers;
 
-import HardNightGame.DesanCardGamestatistic.dto.GameRecord;
-import HardNightGame.DesanCardGamestatistic.dto.GameRecordData;
-import HardNightGame.DesanCardGamestatistic.dto.GameRecordId;
-import HardNightGame.DesanCardGamestatistic.service.GameRecordService;
+import HardNightGame.DesanCardGamestatistic.dtos.GameRecordDto;
+import HardNightGame.DesanCardGamestatistic.dtos.GameRecordDataDto;
+import HardNightGame.DesanCardGamestatistic.dtos.GameRecordIdDto;
+import HardNightGame.DesanCardGamestatistic.services.GameRecordService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,13 +21,13 @@ public class GameRecordController {
     }
 
     @PostMapping
-    public GameRecordId AddGameRecord(@RequestBody GameRecordData gameRecordData) {
+    public GameRecordIdDto AddGameRecord(@RequestBody GameRecordDataDto gameRecordData) {
         log.debug("GameRecordController.AddGameRecord GameRecordData:" + gameRecordData);
         return gameRecordService.AddGameRecord(gameRecordData);
     }
 
     @GetMapping
-    public Collection<GameRecord> GetGameRecord(@RequestParam Integer topCount){
+    public Collection<GameRecordDto> GetGameRecord(@RequestParam Integer topCount){
         return gameRecordService.GetTopGameRecords(topCount);
     }
 }

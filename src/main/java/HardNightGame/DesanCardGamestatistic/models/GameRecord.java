@@ -1,9 +1,8 @@
-package HardNightGame.DesanCardGamestatistic.model;
+package HardNightGame.DesanCardGamestatistic.models;
 
 import lombok.*;
 
 
-import javax.naming.Name;
 import javax.persistence.*;
 
 @Data

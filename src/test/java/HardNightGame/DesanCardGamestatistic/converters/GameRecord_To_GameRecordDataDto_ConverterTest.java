@@ -1,8 +1,7 @@
-package HardNightGame.DesanCardGamestatistic.converter;
+package HardNightGame.DesanCardGamestatistic.converters;
 
-import HardNightGame.DesanCardGamestatistic.dto.GameRecordData;
-import HardNightGame.DesanCardGamestatistic.dto.GameRecordId;
-import HardNightGame.DesanCardGamestatistic.model.GameRecord;
+import HardNightGame.DesanCardGamestatistic.dtos.GameRecordDataDto;
+import HardNightGame.DesanCardGamestatistic.models.GameRecord;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,15 +9,15 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ModelGameRecordToDtoGameRecordDataConverterTest {
+class GameRecord_To_GameRecordDataDto_ConverterTest {
 
-    ModelGameRecordToDtoGameRecordDataConverter converter;
+    GameRecord_To_GameRecordDataDto_Converter converter;
 
     Random random = new Random();
 
     @BeforeEach
     void setUp() {
-        converter = new ModelGameRecordToDtoGameRecordDataConverter();
+        converter = new GameRecord_To_GameRecordDataDto_Converter();
     }
 
     @Test
@@ -32,7 +31,7 @@ class ModelGameRecordToDtoGameRecordDataConverterTest {
         GameRecord gameRecord = new GameRecord();
 
         // Act
-        GameRecordData assertGameRecordDate = converter.convert(gameRecord);
+        GameRecordDataDto assertGameRecordDate = converter.convert(gameRecord);
 
         // Assert
         assertNull(assertGameRecordDate.getName());
@@ -48,7 +47,7 @@ class ModelGameRecordToDtoGameRecordDataConverterTest {
         GameRecord gameRecord = GameRecord.builder().Name(expName).GameTime(expGameTime).build();
 
         // Act
-        GameRecordData assertGameRecordData = converter.convert(gameRecord);
+        GameRecordDataDto assertGameRecordData = converter.convert(gameRecord);
 
         // Assert
         assertEquals(expName, assertGameRecordData.getName());
