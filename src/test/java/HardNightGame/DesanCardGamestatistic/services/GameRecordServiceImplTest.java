@@ -8,15 +8,18 @@ import HardNightGame.DesanCardGamestatistic.repositories.GameRecordRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.core.convert.converter.Converter;
 
 import java.util.*;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class GameRecordServiceImplTest {
@@ -71,7 +74,7 @@ class GameRecordServiceImplTest {
     }
 
     @Test
-    void getTopGameRecords() {
+    void getTopGameRecords_withCount() {
         // Array
         Integer topCount = 2;
 
@@ -100,6 +103,51 @@ class GameRecordServiceImplTest {
         // Assert
         assertTrue(expGameRecord1 == assertGameRecordList.get(0));
         assertTrue(expGameRecord2 == assertGameRecordList.get(1));
+        verify(gameRecordRepository, times(1)).GetTopRecords(topCount);
+    }
 
+    @Test
+    void getAllGameRecords_ReturnAll() {
+        // Array
+
+        GameRecord record1 = GameRecord.builder().build();
+        GameRecord record2 = GameRecord.builder().build();
+
+        Collection<GameRecord> expGameRecordArr = Arrays.asList(new GameRecord[]{record1, record2});
+
+        when(gameRecordRepository.findAll()).thenReturn(expGameRecordArr);
+
+        GameRecordDto expGameRecord1 = new GameRecordDto();
+        GameRecordDto expGameRecord2 = new GameRecordDto();
+
+        when(modelToDtoConverter.convert(any())).thenAnswer(e -> {
+            GameRecord gr = e.getArgument(0);
+            if (gr == record1) return expGameRecord1;
+            else if (gr == record2) return expGameRecord2;
+            else throw new AssertionError("Wrong record");
+        });
+
+        // Act
+        var assertedGameRecord = gameRecordService.GetAllGameRecords();
+        List<GameRecordDto> assertGameRecordList =
+                new ArrayList<>(assertedGameRecord);
+
+        // Assert
+        assertTrue(expGameRecord1 == assertGameRecordList.get(0));
+        assertTrue(expGameRecord2 == assertGameRecordList.get(1));
+        verify(gameRecordRepository, times(1)).findAll();
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, -1})
+    void getTopGameRecords_notPositiveCount_ThrowException(Integer notPositiveCount) {
+        // Array
+
+        // Act
+        assertThrows(IllegalArgumentException.class,
+                () -> gameRecordService.GetTopGameRecords(notPositiveCount));
+
+        // Assert
+        verifyNoInteractions(gameRecordRepository);
     }
 }
