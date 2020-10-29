@@ -5,8 +5,11 @@ import HardNightGame.DesanCardGamestatistic.dtos.GameRecordDataDto;
 import HardNightGame.DesanCardGamestatistic.dtos.GameRecordIdDto;
 import HardNightGame.DesanCardGamestatistic.services.GameRecordService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 import java.util.Collection;
 
 @Slf4j
@@ -26,8 +29,11 @@ public class GameRecordController {
         return gameRecordService.AddGameRecord(gameRecordData);
     }
 
-    @GetMapping
-    public Collection<GameRecordDto> GetGameRecord(@RequestParam Integer topCount){
+    // @Pattern(regexp = "^[1-9]\\d*$")
+    @GetMapping()
+    public Collection<GameRecordDto> GetGameRecord(
+          @RequestParam(required = false) Integer topCount) {
+        if (topCount == null) return gameRecordService.GetAllGameRecords();
         return gameRecordService.GetTopGameRecords(topCount);
     }
 }

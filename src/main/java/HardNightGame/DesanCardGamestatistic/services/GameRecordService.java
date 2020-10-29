@@ -8,5 +8,6 @@ import java.util.Collection;
 
 public interface GameRecordService {
     GameRecordIdDto AddGameRecord(GameRecordDataDto gameRecordData);
-    Collection<GameRecordDto> GetTopGameRecords(Integer topRecords);
+    Collection<GameRecordDto> GetTopGameRecords(Integer topRecords) throws IllegalArgumentException;
+    Collection<GameRecordDto> GetAllGameRecords();
 }
