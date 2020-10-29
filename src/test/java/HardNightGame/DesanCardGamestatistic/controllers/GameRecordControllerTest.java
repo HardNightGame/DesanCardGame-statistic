@@ -17,8 +17,10 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -39,22 +41,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class GameRecordControllerTest {
 
-    @Mock
+    @MockBean
     GameRecordService gameRecordService;
-
-    @InjectMocks
-    GameRecordController controller;
 
     UniqueRandom random = new UniqueRandom();
 
     ObjectMapper objectMapper = new ObjectMapper();
 
+    @Autowired
     MockMvc mockMvc;
 
-    @BeforeEach
-    void setUp() {
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
-    }
+//    @BeforeEach
+//    void setUp() {
+//        mockMvc = MockMvcBuilders.webAppContextSetup();
+//    }
 
     @Test
     void addGameRecord() throws Exception {
@@ -134,7 +134,7 @@ class GameRecordControllerTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {""})
+    @ValueSource(strings = {"", " "})
     void GetGameRecords_ZeroCount_ReturnAll(String queryValue) throws Exception {
         // Array
 
@@ -226,7 +226,7 @@ class GameRecordControllerTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"-1", "a", "1e3", " ", "a2", "3e", "0", "00", "001"})
+    @ValueSource(strings = {"-1", "a", "1e3", "a2", "3e", "0", "00"})
     void GetGameRecords_WrongCount(String queryValue) throws Exception {
         // Array
 
