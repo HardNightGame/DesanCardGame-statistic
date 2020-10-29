@@ -86,8 +86,9 @@ class GameRecordControllerTest {
         verifyNoMoreInteractions(gameRecordService);
     }
 
-    @Test
-    void GetGameRecords_WithCount() throws Exception {
+    @ParameterizedTest
+    @ValueSource(strings = {"2", "02"})
+    void GetGameRecords_WithCount(String query) throws Exception {
         // Array
         Integer expTopRecords = 2;
 
@@ -118,7 +119,7 @@ class GameRecordControllerTest {
 
         // Act
         MvcResult result = mockMvc.perform(get("/game-records")
-                .queryParam("topCount", "2"))
+                .queryParam("topCount", query))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andReturn();
